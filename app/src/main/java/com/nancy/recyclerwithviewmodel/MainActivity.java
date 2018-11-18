@@ -6,17 +6,28 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.nancy.recyclerwithviewmodel.API.APIService;
+import com.nancy.recyclerwithviewmodel.API.retroFitClass;
 import com.nancy.recyclerwithviewmodel.adapter.RecyclerViewAdapter;
 import com.nancy.recyclerwithviewmodel.model.User;
+import com.nancy.recyclerwithviewmodel.model.UserList;
 import com.nancy.recyclerwithviewmodel.viewmodel.UserViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+
 public class MainActivity extends AppCompatActivity {
     private RecyclerViewAdapter mAdapter;
     private RecyclerView recyclerView;
     private List<UserViewModel> userList;
+    private List<User> userRetroList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +49,47 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void loadJson()
+    {
+        APIService api = retroFitClass.getAPIService();
+        Observable<UserList> observable = api.getUserList().subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread());
+
+        observable.subscribe(new Observer<UserList>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(UserList userList) {
+
+                userRetroList = new ArrayList<>();
+                List<User> l = userList.getEmployees();
+
+                for(int i=0;i<l.size();i++)
+                {
+                    User u =new User();
+                    u.setName(l.get(i).getName());
+                    u.setTitle(l.get(i).getTitle());
+                    userRetroList.add(u);
+
+                }
+
+                //now set your custom adapter here
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
     public void getList(){
 
         UserViewModel l1=new UserViewModel();
