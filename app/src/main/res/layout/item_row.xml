@@ -2,21 +2,6 @@
 
 <layout xmlns:bind="http://schemas.android.com/apk/res/android">
 
-    <data>
-
-        <variable
-            name="viewmodel"
-            type="com.nancy.recyclerwithviewmodel.viewmodel.UserViewModel" />
-
-
-
-
-    </data>
-
-
-
-
-
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,43 +10,23 @@
         android:orientation="horizontal"
         android:padding="12dp">
 
-
-
-
-
-
-
-
                 <TextView
                     android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{viewmodel.name}"
+
                     android:textColor="#212121"
                     android:textSize="14dp" />
-
-
-
-
-
-            <TextView
+        <TextView
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@{viewmodel.title}"
                 android:layout_gravity="top|right"
                 android:textColor="#727272"
                 android:textSize="14dp" />
 
-
-
         </LinearLayout>
-
-
-
-
-
 
 
 </layout>

@@ -1,15 +1,15 @@
 package com.nancy.recyclerwithviewmodel.viewmodel;
 
-import com.nancy.recyclerwithviewmodel.model.User;
+import com.nancy.recyclerwithviewmodel.model.Flower;
 
 public class UserViewModel {
 
     public String name;
-    public String title;
+    public String category;
 
-    public UserViewModel(User model) {
+    public UserViewModel(Flower model) {
         this.name = model.getName();
-        this.title = model.getTitle();
+        this.category = model.getCategory();
 
     }
 
